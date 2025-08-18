@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "clinical_trials": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/Users/username/mmcp",
+        "run",
+        "src/ct/ct_server.py"
+      ]
+    }
+  }
+}

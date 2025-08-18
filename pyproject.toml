@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irmcp"
+version = "0.1.0"
+description = "IR MCP project using FastMCP and httpx"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "Proprietary" }
+authors = [{ name = "IRMCP Maintainers" }]
+dependencies = [
+  "fastmcp",
+  "httpx>=0.27",
+]
+
+[project.urls]
+Homepage = "https://example.com"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.uv]
+dev-dependencies = [
+  "pytest>=8.2",
+]

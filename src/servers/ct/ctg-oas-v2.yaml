@@ -153,22 +153,15 @@ paths:
           type: "string"
       - name: "filter.overallStatus"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by comma- or pipe-separated list of statuses"
+        description: "Filter by comma-separated list of statuses"
         required: false
         schema:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Status"
+          type: "string"
         examples:
           example1:
-            value:
-            - "NOT_YET_RECRUITING"
-            - "RECRUITING"
+            value: "NOT_YET_RECRUITING,RECRUITING"
           example2:
-            value:
-            - "COMPLETED"
+            value: "COMPLETED"
       - name: "filter.geo"
         in: "query"
         description: "Filter by geo-function. Currently only distance function is\
@@ -183,24 +176,17 @@ paths:
             value: "distance(39.0035707,-77.1013313,50mi)"
       - name: "filter.ids"
         in: "query"
-        style: "pipeDelimited"
         explode: false
-        description: "Filter by comma- or pipe-separated list of NCT IDs (a.k.a. ClinicalTrials.gov\
+        description: "Filter by comma-separated list of NCT IDs (a.k.a. ClinicalTrials.gov\
           \ identifiers).\nThe provided IDs will be searched in [NCTId](data-api/about-api/study-data-structure#NCTId)\
           \ and\n[NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias)\
           \ fields."
         required: false
         schema:
-          type: "array"
-          items:
-            type: "string"
-            pattern: "^[Nn][Cc][Tt]0*[1-9]\\d{0,7}$"
+          type: "string"
         examples:
           example1:
-            value:
-            - "NCT04852770"
-            - "NCT01728545"
-            - "NCT02109302"
+            value: "NCT04852770,NCT01728545,NCT02109302"
       - name: "filter.advanced"
         in: "query"
         description: "Filter by query in [Essie expression syntax](/find-studies/constructing-complex-search-queries)"
@@ -215,38 +201,25 @@ paths:
               \ years, MAX]"
       - name: "filter.synonyms"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by comma- or pipe-separated list of `area`:`synonym_id`\
+        description: "Filter by comma-separated list of `area`:`synonym_id`\
           \ pairs"
         required: false
         schema:
-          type: "array"
-          items:
-            type: "string"
+          type: "string"
         examples:
           example1:
-            value:
-            - "ConditionSearch:1651367"
-            - "BasicSearch:2013558"
+            value: "ConditionSearch:1651367,BasicSearch:2013558"
       - name: "postFilter.overallStatus"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by comma- or pipe-separated list of statuses"
+        description: "Filter by comma-separated list of statuses"
         required: false
         schema:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Status"
+          type: "string"
         examples:
           example1:
-            value:
-            - "NOT_YET_RECRUITING"
-            - "RECRUITING"
+            value: "NOT_YET_RECRUITING,RECRUITING"
           example2:
-            value:
-            - "COMPLETED"
+            value: "COMPLETED"
       - name: "postFilter.geo"
         in: "query"
         description: "Filter by geo-function. Currently only distance function is\
@@ -261,24 +234,17 @@ paths:
             value: "distance(39.0035707,-77.1013313,50mi)"
       - name: "postFilter.ids"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
+        style: "string"
         description: "Filter by comma- or pipe-separated list of NCT IDs (a.k.a. ClinicalTrials.gov\
           \ identifiers).\nThe provided IDs will be searched in [NCTId](data-api/about-api/study-data-structure#NCTId)\
           \ and\n[NCTIdAlias](data-api/about-api/study-data-structure#NCTIdAlias)\
           \ fields."
         required: false
         schema:
-          type: "array"
-          items:
-            type: "string"
-            pattern: "^[Nn][Cc][Tt]0*[1-9]\\d{0,7}$"
+          type: "string"
         examples:
           example1:
-            value:
-            - "NCT04852770"
-            - "NCT01728545"
-            - "NCT02109302"
+            value: "NCT04852770,NCT01728545,NCT02109302"
       - name: "postFilter.advanced"
         in: "query"
         description: "Filter by query in [Essie expression syntax](/find-studies/constructing-complex-search-queries)"
@@ -293,20 +259,15 @@ paths:
               \ years, MAX]"
       - name: "postFilter.synonyms"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by comma- or pipe-separated list of `area`:`synonym_id`\
+        style: "string"
+        description: "Filter by comma-separated list of `area`:`synonym_id`\
           \ pairs"
         required: false
         schema:
-          type: "array"
-          items:
-            type: "string"
+          type: "string"
         examples:
           example1:
-            value:
-            - "ConditionSearch:1651367"
-            - "BasicSearch:2013558"
+            value: "ConditionSearch:1651367,BasicSearch:2013558"
       - name: "aggFilters"
         in: "query"
         description: "Apply aggregation filters, aggregation counts will not be provided.\n\
@@ -339,40 +300,25 @@ paths:
             value: "func:gauss,scale:500mi,offset:0mi,decay:0.3"
       - name: "fields"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "If specified, must be non-empty comma- or pipe-separated list\
+        description: "If specified, must be non-empty comma-separated list\
           \ of fields to return. If unspecified, all fields will be returned.\nOrder\
-          \ of the fields does not matter.\n\nFor `csv` format, specify list of columns.\
-          \ The column names are available on [CSV Download](/data-api/about-api/csv-download).\n\
-          \nFor `json` format, every list item is either area name, piece name, field\
-          \ name, or special name.\nIf a piece or a field is a branch node, all descendant\
+          \ of the fields does not matter.\nIf a piece or a field is a branch node, all descendant\
           \ fields will be included.\nAll area names are available on [Search Areas](/data-api/about-api/search-areas),\n\
           the piece and field names — on [Data Structure](/data-api/about-api/study-data-structure)\
           \ and also can be retrieved at `/studies/metadata` endpoint.\nThere is a\
           \ special name, `@query`, which expands to all fields queried by search."
         required: false
         schema:
-          type: "array"
-          minItems: 1
-          items:
-            type: "string"
-            pattern: "^([a-zA-Z][a-zA-Z0-9\\-. ]*)|(@query)$"
-          default: ["NCTId","BriefTitle","OverallStatus","BriefSummary","ConditionsModule","EligibilityModule"]
+          type: "string"
+          default: "NCTId,BriefTitle,OverallStatus,BriefSummary,ConditionsModule,EligibilityModule"
         examples:
           example1:
-            value:
-            - "NCTId"
-            - "BriefTitle"
-            - "OverallStatus"
-            - "HasResults"
+            value: "NCTId,BriefTitle,OverallStatus,HasResults"
           example2:
             value: "ProtocolSection"
       - name: "sort"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Comma- or pipe-separated list of sorting options of the studies.\
+        description: "Comma-separated list of sorting options of the studies.\
           \ The returning studies are not sorted by default for a performance reason.\n\
           Every list item contains a field/piece name and an optional sort direction\
           \ (`asc` for ascending or `desc` for descending)\nafter colon character.\n\
@@ -384,23 +330,14 @@ paths:
           \ - `desc`\n* Numeric field - `asc`\n* `@relevance` - `desc`"
         required: false
         schema:
-          type: "array"
-          maxItems: 2
-          default: []
-          items:
-            type: "string"
-            pattern: "^(([a-zA-Z][a-zA-Z0-9\\-. ]*)|(@relevance))(:(asc|desc))?$"
+          type: "string"
         examples:
           example1:
-            value:
-            - "@relevance"
+            value: "@relevance"
           example2:
-            value:
-            - "LastUpdatePostDate"
+            value: "LastUpdatePostDate"
           example3:
-            value:
-            - "EnrollmentCount:desc"
-            - "NumArmGroups"
+            value: "EnrollmentCount:desc,NumArmGroups"
       - name: "countTotal"
         in: "query"
         description: "Count total number of studies in all pages and return `totalCount`\
@@ -532,9 +469,7 @@ paths:
           default: "markdown"
       - name: "fields"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "If specified, must be non-empty comma- or pipe-separated list\
+        description: "If specified, must be non-empty comma-separated list\
           \ of fields to return. If unspecified, all fields will be returned.\nOrder\
           \ of the fields does not matter.\n\nFor `csv` format, specify list of columns.\
           \ The column names are available on [CSV Download](/data-api/about-api/csv-download).\n\
@@ -549,21 +484,12 @@ paths:
           \ [RIS Download](/data-api/about-api/ris-download)."
         required: false
         schema:
-          type: "array"
-          minItems: 1
-          items:
-            type: "string"
-            pattern: "^[a-zA-Z][a-zA-Z0-9\\-. ]*$"
+          type: "string"
         examples:
           example1:
-            value:
-            - "NCTId"
-            - "BriefTitle"
-            - "Reference"
+            value: "NCTId,BriefTitle"
           example2:
-            value:
-            - "ConditionsModule"
-            - "EligibilityModule"
+            value: "ConditionsModule,EligibilityModule"
       responses:
         "200":
           description: "OK"
@@ -710,50 +636,30 @@ paths:
       parameters:
       - name: "types"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by field types"
+        description: "Filter by comma-delimited field types"
         required: false
         schema:
-          type: "array"
-          default: []
-          items:
-            $ref: "#/components/schemas/FieldStatsType"
+          type: "string"
         examples:
           example1:
-            value:
-            - "ENUM"
-            - "BOOLEAN"
+            value: "ENUM,BOOLEAN"
           example2:
-            value:
-            - "INTEGER"
-            - "NUMBER"
+            value: "INTEGER,NUMBER"
       - name: "fields"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
-        description: "Filter by piece names or field paths of leaf fields.\nSee [Data\
+        description: "Filter by comma-delimited piece names or field paths of leaf fields.\nSee [Data\
           \ Structure](/data-api/about-api/study-data-structure) for the available\
-          \ values.\n\nIf specified, must be non-empty comma- or pipe-separated list\
-          \ of fields to return."
+          \ values."
         required: false
         schema:
-          type: "array"
-          minItems: 1
-          items:
-            type: "string"
-            pattern: "^[a-zA-Z][a-zA-Z0-9\\-. ]*$"
+          type: "string"
         examples:
           example1:
-            value:
-            - "Phase"
+            value: "Phase"
           example2:
-            value:
-            - "Condition"
-            - "InterventionName"
+            value: "Condition,InterventionName"
           example3:
-            value:
-            - "protocolSection.armsInterventionsModule.armGroups.interventionNames"
+            value: "protocolSection.armsInterventionsModule.armGroups.interventionNames"
       responses:
         "200":
           description: "OK"
@@ -786,30 +692,20 @@ paths:
       parameters:
       - name: "fields"
         in: "query"
-        style: "pipeDelimited"
-        explode: false
         description: "Filter by piece names or field paths of leaf fields.\nSee [Data\
           \ Structure](/data-api/about-api/study-data-structure) for the available\
-          \ values.\n\nIf specified, must be non-empty comma- or pipe-separated list\
+          \ values.\n\nIf specified, must be non-empty comma-separated list\
           \ of fields to return.\nIf unspecified, all available stats will be returned."
         required: false
         schema:
-          type: "array"
-          items:
-            type: "string"
-            pattern: "^[a-zA-Z][a-zA-Z0-9\\-. ]*$"
-            minLength: 1
+          type: "string"
         examples:
           example1:
-            value:
-            - "Phase"
+            value: "Phase"
           example2:
-            value:
-            - "Condition"
-            - "Intervention"
+            value: "Condition,Intervention"
           example3:
-            value:
-            - "protocolSection.armsInterventionsModule.armGroups.interventionNames"
+            value: "protocolSection.armsInterventionsModule.armGroups.interventionNames"
       responses:
         "200":
           description: "OK"

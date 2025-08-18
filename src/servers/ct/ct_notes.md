@@ -38,25 +38,14 @@ This specification should be optimized for use by LLMs. The BNF should not inclu
 Please create an addendum to this file that discusses the importance of the REST API parameters in doing relevancy searching, e.g. how do filters and postfilter affect the searching and scoring
 ```
 
-## Pydantic model adjustments
-
-* in pydantic, Optional means that a field can be set to None. When creating/reading
-  in a pydantic BaseModel, the optional fields are automatically set to None,
-  so when writing out the BaseModel, all of those fields are output with a value of 
-  null. So input != output. Since all of these null fields fill up LLM context,
-  we added a prune_nulls option to each tool in the ToolFactory that will prune
-  out all nulls in the output. This option is on by default. One minus of this is 
-  that if an field is set to null on input, it won't be on output.
-
 ## ctg-oas-v2.yaml OpenAPI spec
 
-* added default value to /studies fields parameter
+* added default value of /studies fields parameter to a more limited set of fields and modules
 * changed default value of includeIndexedOnly to true for metadata endpoint
-
-Error executing tool fetch_study: 2 validation errors for FetchStudyResponse
-protocolSection.statusModule.studyFirstPostDateStruct.date
-  Input should be None [type=none_required, input_value='2009-02-11', input_type=str]
-    For further information visit https://errors.pydantic.dev/2.11/v/none_required
-protocolSection.statusModule.lastUpdatePostDateStruct.date
-  Input should be None [type=none_required, input_value='2009-02-11', input_type=str]
-    For further information visit https://errors.pydantic.dev/2.11/v/none_required
+* for some reason, style: "pipeDelimited" with explode: false and style:"form" with explode: false does not cause FastMCP to send a parameter as a comma delimited list, but rather performs
+the explode. To fix this, edited all parameters of these styles so
+  * style and explode are deleted
+  * schema.type is string
+  * description is edited to specifically say it is a comma delimited list
+  * schema.minItems and schema.items are deleted
+  * examples are redone to be strings instead of arrays

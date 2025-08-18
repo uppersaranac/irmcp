@@ -1,5 +1,6 @@
 import importlib
 
+
 def test_package_version():
     pkg = importlib.import_module("irmcp")
     assert hasattr(pkg, "__version__")

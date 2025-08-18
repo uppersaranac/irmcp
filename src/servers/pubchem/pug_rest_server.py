@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict
-from pydantic import BaseModel, Field
+
 from mmcp.server import create_server
 from pubchem.pug_rest_tools import TOOL_REGISTRY
+from pydantic import BaseModel, Field
+
 
 # Read chemical naming rules file
 def load_chemical_naming_rules() -> str:

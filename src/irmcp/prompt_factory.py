@@ -1,7 +1,7 @@
 """Prompt factory for registering prompts with an MCP server from a registry."""
 
-from typing import Any, Dict, List
 import inspect
+from typing import Any, Dict, List
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.prompts.base import Prompt, PromptArgument

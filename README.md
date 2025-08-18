@@ -13,6 +13,7 @@ A Python project using FastMCP and httpx. Managed with uv, tested with pytest.
 - Create and use a virtual environment with uv.
 - Install dependencies.
 - Run tests with pytest.
+ - Lint with ruff and type-check with mypy.
 
 See commands at the end of this file.
 
@@ -39,4 +40,9 @@ uv sync
 
 # Run tests
 uv run pytest
+
+# Lint (Ruff) and type-check (mypy)
+uv run ruff check
+uv run ruff format
+uv run mypy
 ```

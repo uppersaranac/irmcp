@@ -1,11 +1,14 @@
 """Prompt factory for registering prompts with an MCP server from a registry."""
 
 import inspect
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Protocol
 
-from mcp.server.fastmcp import FastMCP
-from mcp.server.fastmcp.prompts.base import Prompt, PromptArgument
+from fastmcp.prompts.prompt import Prompt, PromptArgument
 from pydantic import BaseModel, RootModel
+
+
+class PromptCapableServer(Protocol):
+    def add_prompt(self, prompt: Any) -> Any: ...
 
 
 class PromptFactory:
@@ -15,7 +18,7 @@ class PromptFactory:
     add_prompt mechanism.
     """
     
-    def __init__(self, server: FastMCP):
+    def __init__(self, server: PromptCapableServer):
         """Initialize the factory with an MCP server.
         
         :param server: The FastMCP server to register prompts with.
@@ -63,49 +66,61 @@ class PromptFactory:
                     required=required
                 ))
         
-        # Create the prompt handler function
-        async def prompt_handler(**kwargs: Any) -> str:
-            """Handle prompt generation with parameter substitution."""
-            params = kwargs
-                
-            # Validate parameters if schema is provided
-            if parameters_schema and isinstance(parameters_schema, type) and (issubclass(parameters_schema, BaseModel) or issubclass(parameters_schema, RootModel)):
-                validated_params = parameters_schema.model_validate(params, by_alias=True)
-                params = validated_params.model_dump(by_alias=True)
-            
-            # Check if there's a custom executor function
-            executor = spec.get("executor")
-            if executor and callable(executor):
-                # Use custom executor (must be an async function)
-                if inspect.iscoroutinefunction(executor):
-                    return await executor(prompt_name, params, message_template)
+        # Build a function with explicit parameters (no **kwargs) so FastMCP can introspect it
+        executor = spec.get("executor")
+        is_async_executor = inspect.iscoroutinefunction(executor) if executor else False
+
+        # Construct parameter signature from Pydantic model if provided
+        params_list: List[str] = []
+        param_names: List[str] = []
+        if parameters_schema and isinstance(parameters_schema, type) and (
+            issubclass(parameters_schema, BaseModel) or issubclass(parameters_schema, RootModel)
+        ):
+            for field_name, field_info in parameters_schema.model_fields.items():
+                # Basic, conservative annotation to help UX; conversion handled by template or executor
+                if field_info.is_required():
+                    params_list.append(f"{field_name}: str")
                 else:
-                    raise ValueError(f"Executor for prompt '{prompt_name}' must be an async function")
-            else:
-                # Default behavior: substitute parameters in the message template
-                # Replace None values with empty strings for cleaner templates
-                template_params = {k: (v if v is not None else "") for k, v in params.items()}
-                
-                # Substitute parameters in the message template
-                try:
-                    return message_template.format(**template_params)
-                except KeyError as e:
-                    # Handle missing parameters gracefully
-                    return f"Error: Missing parameter {e} for prompt '{prompt_name}'"
-                except Exception as e:
-                    return f"Error formatting prompt '{prompt_name}': {str(e)}"
-        
-        # Set the function name for debugging
-        prompt_handler.__name__ = f"prompt_{prompt_name}"
-        
-        # Create the Prompt object
-        prompt = Prompt(
+                    params_list.append(f"{field_name}: str | None = None")
+                param_names.append(field_name)
+
+        param_sig = ", ".join(params_list)
+        param_dict_build = ", ".join([f"'{n}': {n}" for n in param_names])
+
+        func_name = f"prompt_{prompt_name}"
+        if is_async_executor:
+            body = (
+                "async def "
+                + func_name
+                + f"({param_sig}):\n"
+                + ("    params = {" + param_dict_build + "}\n" if param_dict_build else "    params = {}\n")
+                + f"    return await _executor('{prompt_name}', params, _message_template)\n"
+            )
+        else:
+            body = (
+                "def "
+                + func_name
+                + f"({param_sig}):\n"
+                + ("    params = {" + param_dict_build + "}\n" if param_dict_build else "    params = {}\n")
+                + "    template_params = {k: (v if v is not None else '') for k, v in params.items()}\n"
+                + "    return _message_template.format(**template_params)\n"
+            )
+
+        globals_ns: Dict[str, Any] = {
+            "_executor": executor,
+            "_message_template": message_template,
+        }
+        locals_ns: Dict[str, Any] = {}
+        exec(body, globals_ns, locals_ns)
+        prompt_fn = locals_ns[func_name]
+
+        # Create the Prompt from the generated function (FastMCP API)
+        prompt = Prompt.from_function(
+            fn=prompt_fn,
             name=prompt_name,
             title=title,
             description=description,
-            arguments=arguments if arguments else None,
-            fn=prompt_handler
         )
-        
+
         # Register the prompt with the server
         self.server.add_prompt(prompt)

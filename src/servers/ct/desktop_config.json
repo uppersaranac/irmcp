@@ -4,9 +4,9 @@
       "command": "uv",
       "args": [
         "--directory",
-        "/Users/username/mmcp",
+        "/Users/username/irmcp",
         "run",
-        "src/ct/ct_server.py"
+        "src/servers/ct/ct_server.py"
       ]
     }
   }

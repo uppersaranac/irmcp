@@ -1,26 +1,15 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
-from ct.ct_tools import TOOL_REGISTRY
-from mmcp.server import create_server
-from pydantic import BaseModel, Field
+# Ensure FastMCP uses the experimental OpenAPI parser before importing fastmcp modules
+os.environ.setdefault("FASTMCP_EXPERIMENTAL_ENABLE_NEW_OPENAPI_PARSER", "true")
 
+import yaml
+from fastmcp.experimental.utilities.openapi import convert_openapi_schema_to_json_schema
 
-# Prompt parameter models
-class StudySearchParams(BaseModel):
-    """Parameters for study search prompts."""
-    condition: Optional[str] = Field(default=None, description="Medical condition or disease to search for")
-    intervention: Optional[str] = Field(default=None, description="Treatment or intervention being studied")
-    location: Optional[str] = Field(default=None, description="Geographic location for studies") 
-    status: Optional[str] = Field(default=None, description="Study status (e.g., recruiting, completed)")
-    age_range: Optional[str] = Field(default=None, description="Age range of participants")
-
-class StudyAnalysisParams(BaseModel):
-    """Parameters for study analysis prompts."""
-    nct_id: str = Field(description="NCT ID of the study to analyze")
-    focus_area: Optional[str] = Field(default=None, description="Specific aspect to focus on (e.g., eligibility, outcomes)")
+from irmcp.server import create_server, make_async_httpx_client
 
 # Prompt registry for ClinicalTrials.gov MCP server
 PROMPT_REGISTRY: Dict[str, Dict[str, Any]] = {
@@ -91,28 +80,46 @@ def load_essie_rules() -> str:
     except FileNotFoundError:
         return "ClinicalTrials.gov study search guide file not found."
 
-TOOL_REGISTRY['list_studies']["description"] += "\n\n" + load_essie_rules() + """
-\n\n When composing queries you must follow these guidelines:
-1. Only use the search fields, search areas, sections, modules and structs given above. Use full names and do not invent names.
-2. Use ESSIE search syntax for params that can accept that format except when doing free text searching.
-3. When filling out the fields parameter, use only fields, not modules.
-"""
+
+# TOOL_REGISTRY['list_studies']["description"] += "\n\n" + load_essie_rules() + """
+# \n\n When composing queries you must follow these guidelines:
+# 1. Only use the search fields, search areas, sections, modules and structs given above. Use full names and do not invent names.
+# 2. Use ESSIE search syntax for params that can accept that format except when doing free text searching.
+# 3. When filling out the fields parameter, use only fields, not modules.
+# """
 
 # Server configuration
 API_BASE = os.environ.get("API_BASE", "https://clinicaltrials.gov/api/v2")
 DEFAULT_TIMEOUT = float(os.environ.get("API_TIMEOUT", "30"))
 
+
 def main() -> None:
-    """Entry point: build and run the MCP server."""
-    # Build app using the server factory with both tools and prompts
-    app = create_server(
-        server_name="clinical-trials",
-        tool_registry=TOOL_REGISTRY,
-        prompt_registry=PROMPT_REGISTRY,
-        api_base=API_BASE,
-        timeout=DEFAULT_TIMEOUT
-    )
-    app.run()
+  """Entry point: build and run the MCP server."""
+
+  # Use an async client: FastMCP's OpenAPI server awaits HTTP calls
+  client = make_async_httpx_client(
+    base_url=API_BASE,
+    timeout=DEFAULT_TIMEOUT,
+    log_http=os.environ.get("API_HTTP_LOG", "").lower() in {"1", "true", "yes", "on", "debug"},
+    log_headers=os.environ.get("API_HTTP_LOG_HEADERS", "").lower() in {"1", "true", "yes", "on"},
+    log_body=os.environ.get("API_HTTP_LOG_BODY", "").lower() in {"1", "true", "yes", "on"},
+    logger_name="ct.http",
+  )
+
+  schema_path = os.path.join(os.path.dirname(__file__), "ctg-oas-v2.yaml")
+  with open(schema_path, "r", encoding="utf-8") as f:
+    schema = yaml.safe_load(f)
+
+  openapi_spec = convert_openapi_schema_to_json_schema(schema=schema)
+
+  # Build app using the server factory with both tools and prompts
+  app = create_server(
+    name="clinical-trials",
+    openapi_spec=openapi_spec,
+    client=client,
+    prompt_registry=PROMPT_REGISTRY,
+  )
+  app.run()
 
 if __name__ == "__main__":
     main()

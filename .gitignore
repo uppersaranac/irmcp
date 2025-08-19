@@ -57,3 +57,9 @@ coverage.xml
 
 # VS Code
 .vscode/
+
+# ruff
+.ruff_cache/
+
+# mypy
+.mypy_cache/

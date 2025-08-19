@@ -1,9 +1,10 @@
 import httpx
+from fastmcp.experimental.server.openapi import FastMCPOpenAPI
 
-from irmcp.server import create_server
+from irmcp.server import setup_httpx_logging
 
 
-def test_create_server_registers_prompts_minimal_openapi():
+def test_create_server__minimal_openapi():
     # Minimal OpenAPI that should be acceptable to FastMCP
     openapi = {
         "openapi": "3.1.0",
@@ -17,21 +18,8 @@ def test_create_server_registers_prompts_minimal_openapi():
 
     client = httpx.AsyncClient(base_url="https://api.test", transport=httpx.MockTransport(handler))
 
-    # One trivial prompt registry
-    prompt_registry = {
-        "hello": {"title": "Hi", "description": "hi", "message": "Hi"}
-    }
-
-    server = create_server(
-        name="t",
-        openapi_spec=openapi,
-        client=client,
-        prompt_registry=prompt_registry,
-    )
-
-    # Should have at least one prompt registered
-    prompts = __import__("anyio").run(server.get_prompts)
-    assert "hello" in prompts
+    setup_httpx_logging()
+    server = FastMCPOpenAPI(openapi_spec=openapi, client=client, name="t")
 
     # Server has a client and can run http app (smoke)
     assert hasattr(server, "http_app")

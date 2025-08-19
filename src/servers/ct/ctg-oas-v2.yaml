@@ -310,7 +310,7 @@ paths:
         required: false
         schema:
           type: "string"
-          default: "NCTId,BriefTitle,OverallStatus,BriefSummary,ConditionsModule,EligibilityModule"
+          default: "NCTId,BriefTitle,OverallStatus,Phase,EligibilityCriteria,Sex,MinimumAge,MaximumAge,Condition,InterventionName,LocationCity,LocationState,LocationCountry,BriefSummary"
         examples:
           example1:
             value: "NCTId,BriefTitle,OverallStatus,HasResults"

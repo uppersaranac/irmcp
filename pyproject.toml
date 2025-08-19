@@ -34,6 +34,7 @@ dev-dependencies = [
   "pytest>=8.2",
   "ruff>=0.6",
   "mypy>=1.10",
+  "types-pyyaml>=6.0.12.20250809",
 ]
 
 [tool.ruff]

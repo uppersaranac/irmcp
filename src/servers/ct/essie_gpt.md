@@ -141,7 +141,7 @@ Example field values and vocabularies in context: If a study is about heart atta
 * LocationCity: “Boston”
 * LocationState: “Massachusetts”
 * LocationCountry: “United States”
-* LocationStatus: “Recruiting”
+* LocationStatus: “RECRUITING”
 
 Understanding these fields and their types helps in crafting precise queries (e.g., knowing that you should quote multi-word phrases, or use RANGE for numeric fields, or that searching “MI” might find “Myocardial Infarction” because of the synonym system).
 
@@ -247,7 +247,7 @@ AND AREA[Keyword] diabetes
 AND AREA[Gender] Female
 AND AREA[MinimumAge] RANGE[MIN,65 years]
 AND AREA[MaximumAge] RANGE[65 years,MAX]
-AND AREA[OverallStatus] Recruiting 
+AND AREA[OverallStatus] RECRUITING
 AND SEARCH[Location]
      (AREA[LocationCity] "Washington" AND AREA[LocationState] "District of Columbia")
    )

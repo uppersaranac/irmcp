@@ -32,6 +32,10 @@ This specification should be optimized for use by LLMs. The BNF should not inclu
   light editing to make the doc markdown format
 * The intro and conclusion were edited out
 * added " years" to ages in RANGE[] queries
+* the enum values for OverallStatus were not in the format the server expected, such as not
+  being upper case, so added the correct values in.
+* The PrimaryOutcomeMeasure and SecondaryOutcomeMeasure had Title appended incorrectly. Probably due to the
+  structure of the field as it has a title subfield.
 * added an addendum on the filters and postfilters using the prompt:
 
 ```md

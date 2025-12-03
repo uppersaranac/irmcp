@@ -1,6 +1,7 @@
 # IR MCP
 
-A Python project using FastMCP and httpx. Managed with uv, tested with pytest.
+FastMCP servers to access a variety of biomedical and chemical search engines,
+including clinical trials and PubChem.
 
 ## Setup
 

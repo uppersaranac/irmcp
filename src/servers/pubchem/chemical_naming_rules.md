@@ -4,7 +4,7 @@
 
 ## 1. Purpose and Scope
 
-- These ruse are used to generate names for chemicals in the NIST Spectral Libraries.
+- The following rules are used to generate names for chemicals in the NIST Spectral Libraries.
 - Every **unique chemical structure** receives one **unique name**.
 - Unless using common names, names are **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases.
 - For ease of comparison, the section numbers follow the [Naming and Indexing of
@@ -13,21 +13,15 @@ Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).
 
 ---
 
-## A. Nomenclature Systems and General Principles (¶101–139)
-
 ### 101. Foreword
 
-This guide details the selection of chemical substance names. It is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how the names in the the NIST spectral libraries are constructed, ordered, and formatted. The primary goal is to enable a user to locate specific chemical substances within an alphabetical index. The nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the rigid requirements of an alphabetical listing, ensuring that structurally related substances appear in juxtaposition (e.g., parents followed by their derivatives).
-
-### 103. Introduction
-
-In scientific literature, a single compound may have multiple names (e.g., *2-Aminoethanol* vs. *Ethanolamine*). To avoid scattering information, a single preferred index name is selected for each substance. For the provided list, systematic names are preferred over trivial names to ensure consistency and retrievability.
+This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how the names NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to locate specific chemical substances within an alphabetical index. The nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the rigid requirements of an alphabetical listing, ensuring that structurally related substances appear in juxtaposition (e.g., parents followed by their derivatives).
 
 ### 104. Inversion of Names
 
 To group related substances, index names are inverted. The **Heading Parent** (the main part of the molecule) is listed first, followed by a comma, and then the **Substituents**. If a derivative (like an ester or salt) is present, it appears in the **Modification** at the end of the name.
 
-- *Example from list:* **Acetic acid, 2-(2,4-dichlorophenoxy)-, methyl ester**
+- *Example:* **Acetic acid, 2-(2,4-dichlorophenoxy)-, methyl ester**
   - *Heading Parent:* Acetic acid
   - *Substituent:* 2-(2,4-dichlorophenoxy)-
   - *Modification:* methyl ester
@@ -59,12 +53,19 @@ Punctuation is critical for clarity.
 - **Hyphens** join locants to names (e.g., *4-chloro-*).
 - **Italics** are used for locants like *N-* or *O-* and stereochemical descriptors like *cis-* or *trans-*.
   - *Example:* **Acetamide, N-phenyl-**.
+- **Greek Letters:** The dataset employs a specific ASCII-compatible format for special characters and punctuation to ensure machine readability. Greek characters are not used as symbols (e.g., $\alpha, \beta$). Instead, they are written phonetically, enclosed by periods.
+  - **.alpha.** is used for alpha.
+  - **.beta.** is used for beta.
+  - **.eta.** is used for eta (hapticity).
+  - **.mu.** is used for mu (bridging).
+  - **.pi.** is used for pi (bonding).
+  - *Examples:* **.beta.-Alanine**; **.pi.-Cyclopentadienyl...**; **1,1,1,2,3,3,3-Heptafluoro-2-methoxypropane** (Note the commas separating locants).
 
 ### 109. Enclosing Marks
 
 Parentheses `()` and brackets `[]` are used to prevent ambiguity, particularly when a substituent itself is substituted (compound radicals).
 
-- *Example:* **Benzoic acid, 4-[[(2,4-dichlorophenyl)amino]carbonyl]-**
+- *Example:* **Benzoic acid, 4-\[\[(2,4-dichlorophenyl)amino\]carbonyl\]-**
   - Here, brackets enclose the complex substituent group attached to the parent Benzoic acid.
 
 ### 110. Multiplicative Prefixes
@@ -95,20 +96,24 @@ Locants (numbers or letters) indicate the position of substituents on the skelet
 For compounds that exist in equilibrium between two forms (tautomers), a single preferred form is chosen for the index name to avoid scattering. Common examples include ketones vs. enols and amides vs. imidic acids.
 
 - *Example:* **2-Pyridinone** is preferred over *2-Pyridinol* when the oxo-form is dominant or preferred by rule.
-- *Example from list:* **2,4(1H,3H)-Pyrimidinedione** is used instead of the Uracil trivial name.
+- *Example:* **2,4(1H,3H)-Pyrimidinedione** is used instead of the Uracil trivial name.
 
 ### 130. Substitutive Nomenclature
 
 This is the fundamental system used for most organic compounds in the list. A hydrogen atom on the parent skeleton is "substituted" by a radical (group).
 
-- *Example:* **Benzene, chloromethyl-** (A hydrogen on benzene is replaced by a chloromethyl group).
+- *Examples:* **Benzene, chloromethyl-** (A hydrogen on benzene is replaced by a chloromethyl group).
 
 ### 135. Indicated Hydrogen
 
-For cyclic systems where the position of double bonds requires specification of a saturated atom, "Indicated Hydrogen" is used (e.g., *1H-*, *2H-*).
+For ring systems where maximum unsaturation is possible but one position remains saturated, the "Indicated Hydrogen" convention is strictly observed.
 
-- *Example:* **1H-Indole** vs. **3H-Indole**.
-- *Example from list:* **1H-Benzotriazole, 1-methyl-**.
+- **Rule:** The position of the saturated atom is indicated by a locant and a capital 'H' immediately preceding the ring name.
+- **Priority:** This indicator appears at the very beginning of the name.
+- *Examples from Data:*
+  - **1H-1,2,4-Triazol-5-amine** (The nitrogen at position 1 has the hydrogen).
+  - **2H-1,3-benzodioxole** (The carbon at position 2 is saturated).
+  - **5H-Cyclohepta-1,4-dioxin**.
 
 ---
 
@@ -118,44 +123,44 @@ For cyclic systems where the position of double bonds requires specification of 
 
 Saturated chains are named Alkanes (e.g., *Butane*, *Pentane*). Unsaturated chains take suffixes like *-ene* (Alkenes) or *-yne* (Alkynes).
 
-- *Example:* **1-Pentene**; **1-Octyne**.
+- *Examples:* **1-Pentene**; **1-Octyne**.
 
 ### 145. Cycloalkanes and Cycloalkenes
 
 Monocyclic hydrocarbons are named by attaching the prefix *cyclo-* to the acyclic name.
 
-- *Example:* **Cyclopentane**; **Cyclohexene**.
+- *Examples:* **Cyclopentane**; **Cyclohexene**.
 
 ### 146. Monocyclic Heterocycles
 
 Rings containing heteroatoms (N, O, S) are named using Hantzsch-Widman stems or retained trivial names.
 
-- *Example:* **Pyridine** (6-membered, N); **Furan** (5-membered, O); **Thiophene** (5-membered, S); **Piperidine** (saturated Pyridine).
+- *Examples:* **Pyridine** (6-membered, N); **Furan** (5-membered, O); **Thiophene** (5-membered, S); **Piperidine** (saturated Pyridine).
 
 ### 147. Fused Ring Systems
 
 Polycyclic systems formed by sharing adjacent atoms are named by combining component names or using trivial names.
 
-- *Example:* **Naphthalene**; **Quinoline** (Benzene fused to Pyridine); **Benzofuran**.
+- *Examples:* **Naphthalene**; **Quinoline** (Benzene fused to Pyridine); **Benzofuran**.
 
 ### 148. Bridged Ring Systems
 
-Systems with shared atoms that are not adjacent are named using the Von Baeyer system (e.g., Bicyclo[x.y.z]alkane).
+Systems with shared atoms that are not adjacent are named using the Von Baeyer system (e.g., Bicyclo\[x.y.z\]alkane).
 
-- *Example:* **Bicyclo[2.2.1]heptane**; **Adamantane**.
+- *Examples:* **Bicyclo\[2.2.1\]heptane**; **Adamantane**.
 
 ### 156. Spiro Systems
 
 Systems where two rings share a single atom are named *Spiro*.
 
-- *Example:* **Spiro[4.5]decane**.
+- *Example:* **Spiro\[4.5\]decane**.
 
 ### 159. Boron Compounds
 
 Neutral boron hydrides are named *Borane*.
 
-- *Example:* **Borane, trifluoro-**. Complex organoboron compounds in the list are named as derivatives.
-- *Example:* **9-Borabicyclo[3.3.1]nonane**.
+- *Example:* **Borane, trifluoro-**. Complex organoboron compounds are named as derivatives.
+- *Example:* **9-Borabicyclo\[3.3.1\]nonane**.
 
 ---
 
@@ -165,37 +170,37 @@ Neutral boron hydrides are named *Borane*.
 
 Named with the suffix *-oic acid* (acyclic) or *-carboxylic acid* (cyclic attached carbon).
 
-- *Example:* **Heptanoic acid**; **Cyclopropanecarboxylic acid**.
+- *Examples:* **Heptanoic acid**; **Cyclopropanecarboxylic acid**.
 
 ### 166. Acid Halides
 
 Named by changing *-ic acid* to *-yl halide*.
 
-- *Example:* **Acetyl chloride**; **Benzoyl chloride**.
+- *Examples:* **Acetyl chloride**; **Benzoyl chloride**.
 
 ### 167. Amides
 
 Named by changing *-oic acid* to *-amide*.
 
-- *Example:* **Benzamide**; **Butanamide**.
+- *Examples:* **Benzamide**; **Butanamide**.
 
 ### 168. Nitriles
 
 Named by adding *-nitrile* to the alkane name or changing *-ic acid* to *-onitrile*.
 
-- *Example:* **Acetonitrile**; **Benzonitrile**.
+- *Examples:* **Acetonitrile**; **Benzonitrile**.
 
 ### 170. Ketones
 
 Named using the suffix *-one*.
 
-- *Example:* **2-Propanone** (Acetone); **Cyclohexanone**.
+- *Examples:* **2-Propanone** (Acetone); **Cyclohexanone**.
 
 ### 171. Alcohols
 
 Named using the suffix *-ol*.
 
-- *Example:* **Ethanol**; **Cyclohexanol**.
+- *Examples:* **Ethanol**; **Cyclohexanol**.
 
 ### 173. Thiols
 
@@ -207,7 +212,7 @@ Named using the suffix *-thiol*.
 
 Named using the suffix *-amine*.
 
-- *Example:* **Benzenamine** (Aniline); **1-Butanamine**.
+- *Examples:* **Benzenamine** (Aniline); **1-Butanamine**.
 
 ---
 
@@ -221,10 +226,22 @@ Anions are generally named by changing the parent ending.
 
 ### 185. Esters
 
-Esters are named as derivatives of the acid parent. The alcohol portion is cited in the modification.
+The dataset exhibits two distinct naming styles for esters, corresponding to indexing complex acids versus common nomenclature for simpler ones.
 
-- *Example:* **Acetic acid, methyl ester**.
-- *Special Case:* Common esters may be named using the alcohol as the parent if the acid is simple, but CA preference is usually the acid. However, in the provided list, entries like **Methyl 4-bromo-3-methoxybenzoate** follow the IUPAC style often used in casual listings, which CA indexes as **Benzoic acid, 4-bromo-3-methoxy-, methyl ester**.
+#### Style A: Inverted (Acid Header)**
+
+- **Rule:** The parent acid is the heading. The alcohol portion is listed as a modification following a comma, ending with the word "ester".
+- *Examples:*
+  - **Propanoic acid, 2-chloro-, ethyl ester**.
+  - **3-Isoxazolecarboxylic acid, 4-(chloromethyl)-5-methyl-, methyl ester**.
+  - **Acetic acid, bromo-, ethyl ester**.
+
+#### Style B: Non-Inverted (Alkyl Alkanoate)**
+
+- **Rule:** The alkyl group (alcohol derived) is named first, followed by the acid derivative (alkanoate).
+- *Examples:*
+  - **Methyl 2,4,6-trichloro-3,5-dimethoxybenzoate**.
+  - **Ethyl 2-nitropropionate**.
 
 ### 189. Hydrazides
 
@@ -234,9 +251,12 @@ Derivatives of hydrazine with acid groups.
 
 ### 190. Hydrazones and Oximes
 
-Functional derivatives of ketones and aldehydes.
+Oximes are treated as functional derivatives of their parent aldehydes or ketones.
 
-- *Example:* **2-Butanone, oxime**; **Benzaldehyde, hydrazone**.
+- **Rule:** The name is constructed as [Parent Aldehyde/Ketone], \[Substituents\], **oxime**.
+- *Examples:*
+  - **1H-Pyrazole-4-carboxaldehyde, 1,3-dimethyl-, oxime**.
+  - **2,7-Dioxatricyclo\[4.4.0.0(3,8)\]decan-4-one, oxime**.
 
 ### 194. Organometallic Compounds
 
@@ -248,19 +268,19 @@ Compounds containing metal-carbon bonds (excluding simple salts) are often named
 
 Named substitutively using *alkoxy-* prefixes.
 
-- *Example:* **Benzene, methoxy-** (Anisole); **Ethane, 1,1'-oxybis-** (Diethyl ether).
+- *Examples:* **Benzene, methoxy-** (Anisole); **Ethane, 1,1'-oxybis-** (Diethyl ether).
 
 ### 197. Phosphorus Compounds
 
 Include Phosphines, Phosphonates, and Phosphates.
 
-- *Example:* **Phosphine, triphenyl-**; **Phosphonic acid, diethyl ester**.
+- *Examples:* **Phosphine, triphenyl-**; **Phosphonic acid, diethyl ester**.
 
 ### 198. Onium Compounds
 
 Cations derived from heteroatoms.
 
-- *Example:* **Ammonium**; **Pyridinium**.
+- *Examples:* **Ammonium**; **Pyridinium**.
 
 ### 200. Sulfur Compounds
 
@@ -278,12 +298,12 @@ Includes Sulfides, Sulfoxides, Sulfones, and Sulfonamides.
 
 Certain complex natural products (Terpenes, Steroids) have trivial names that imply a specific absolute configuration. These are used as Heading Parents.
 
-- *Example (Steroid):* **Cholestane**; **Androstane**; **Pregnane**.
-- *Example (Terpene):* **Pinane**; **Bornane**.
+- *Examples (Steroid):* **Cholestane**; **Androstane**; **Pregnane**.
+- *Examples (Terpene):* **Pinane**; **Bornane**.
 
 ### 203. Stereochemical Descriptors
 
-Descriptors indicate the spatial arrangement of atoms.
+Stereochemical descriptors are used extensively and follow specific placement rules, often appearing at the end of the name for indexing, or preceding the substituent they modify.
 
 - **(E)- / (Z)-**: Used for double bond isomers (Entgegen/Zusammen).
   - *Example:* **2-Butenoic acid, (E)-**.
@@ -293,13 +313,18 @@ Descriptors indicate the spatial arrangement of atoms.
   - *Example:* **2-Butanol, (R)-**.
 - **.alpha.- / .beta.-**: Used specifically in steroid and terpene nomenclature to denote stereochemistry relative to the plane of the ring system.
   - *Example:* **Cholestan-3-ol, (3.beta.)-**.
+- **Carbohydrates:** Anomeric positions are designated with **.alpha.** or **.beta.**
 
 ### 206. Amino Acids and Peptides
 
 Common amino acids retain their trivial names.
 
-- *Example:* **Alanine**; **Glycine**; **Leucine**.
+- *Examples:* **Alanine**; **Glycine**; **Leucine**.
 - Derivatives are named as substituted acids or esters: **L-Alanine, methyl ester**.
+- **Rule:** Amino acid residues are concatenated with hyphens.
+- *Examples=:*
+  - **Glycyl-dl-aspartic acid**.
+  - **Glycylglycylglycylglycine**.
 
 ---
 
@@ -307,10 +332,17 @@ Common amino acids retain their trivial names.
 
 ### 215. Coordination Compounds
 
-Complexes of metals with ligands. Named by listing the ligands alphabetically followed by the metal.
+The naming of transition metal complexes strictly follows the "Central Metal" heading convention.
 
-- *Example:* **Iron, tricarbonyl(cyclooctatetraene)-**.
-- *Example:* **Cobalt, bis(cyclopentadienyl)-** (Cobaltocene).
+- **Heading:** The name of the metal appears first.
+- **Ligands:** Ligands follow the metal, separated by commas or parentheses.
+- **Hapticity (.eta.):** Used when a ligand coordinates through contiguous atoms (e.g., pi-systems). Written as *.eta.* followed by the number of atoms.
+- **Bridging (.mu.):** Used for ligands shared between two metal centers. Written as *.mu.*.
+- *Examples:*
+  - **Iron, tricarbonyl\[(1,2,3,4-.eta.)-1,3-cyclooctadiene\]-**.
+  - **Tungsten, pentacarbonyl...**.
+  - **Bis(tricarbonyliron)-(Fe-Fe), (.mu.-bromo) \[.mu.-.eta.-1:.eta.-2-2-(4-fluorophenyl)vinyl\]-** (Complex binuclear cluster).
+  - **Manganese, acetylpentacarbonyl-**.
 
 ### 220. Isotopically Labeled Compounds
 
@@ -318,12 +350,14 @@ Compounds where specific atoms are replaced by isotopes.
 
 - *Example:* **Methane-d3-ol** (Methanol with 3 Deuterium atoms); **Chlorobenzene-d5**.
 - The isotope is indicated after the name of the part of the molecule it modifies.
+- While mass numbers are typically used, the dataset specifically lists named isotopes as distinct entries.
+  - *Example:* **Deuterium**.
 
 ### 223. Porphyrins
 
 Macrocyclic compounds related to heme.
 
-- *Example from list:* **21H,23H-Porphine**.
+- *Example:* **21H,23H-Porphine**.
 
 ### 224. Vitamins
 

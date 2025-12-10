@@ -2,11 +2,13 @@
 
 ---
 
-## 1. Purpose and Scope
+## 1. Purpose and Requirements
 
-- The following rules are used to generate names for chemicals in the NIST Spectral Libraries.
+- These requirements are used to generate names for chemicals in the NIST Spectral Libraries.
 - Every **unique chemical structure** receives one **unique name**.
-- Unless using common names, names are **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases.
+- When the chemical is typically referred to in the scientific literature using a common name, such as acetone, please use the common name. Do not use popular common names that are not typically used in
+the scientific literature, such as alcohol for ethyl alchohol, or that refer to mixtures, like vinegar.
+- Unless using common names, names are **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases. The rules for these names are given below.
 - For ease of comparison, the section numbers follow the [Naming and Indexing of
 Chemical Substances for
 Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).

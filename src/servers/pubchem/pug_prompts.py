@@ -36,8 +36,10 @@ def register_prompts(app: Any) -> None:
     def naming_smiles(SMILES: str) -> str:  # noqa: N803 - keep param name to match template
         return (
             f"Please name the molecule {SMILES} by first matching a\n"
-            "compound in Pubchem. Use the pubchem cid to retrieve a list of names for the\n"
+            "compound in Pubchem. Use the pubchem cid to retrieve a list of names for the \n"
             "compound and also to retrieve the iupac name. Use the naming rules given below to \n"
-            "name the chemical.\n\n"
+            "name the chemical by selecting a name from the list and reformatting it as necessary \n"
+            "to follow the rules. Examine the rules step-by-step. After naming the chemical, review the name to ensure it follows the \n"
+            "rules.\n\n"
             f"{_load_chemical_naming_rules()}\n"
         )

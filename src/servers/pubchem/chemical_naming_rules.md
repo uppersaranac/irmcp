@@ -17,7 +17,7 @@ Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).
 
 ### 101. Foreword
 
-This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how the names NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to locate specific chemical substances within an alphabetical index. The nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the rigid requirements of an alphabetical listing, ensuring that structurally related substances appear in juxtaposition (e.g., parents followed by their derivatives).
+This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how the names NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances. The nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries, including quickly comprehending the chemicals in a list.
 
 ### 104. Inversion of Names
 
@@ -228,7 +228,7 @@ Anions are generally named by changing the parent ending.
 
 ### 185. Esters
 
-The dataset exhibits two distinct naming styles for esters, corresponding to indexing complex acids versus common nomenclature for simpler ones.
+There are two distinct naming styles for esters, corresponding to indexing complex acids versus common nomenclature for simpler ones.
 
 #### Style A: Inverted (Acid Header)**
 

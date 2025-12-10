@@ -2,24 +2,24 @@
 
 ---
 
-## 1. Purpose and Requirements
-
-- These requirements are used to generate names for chemicals in the NIST Spectral Libraries.
-- Every **unique chemical structure** receives one **unique name**.
-- When the chemical is typically referred to in the scientific literature using a common name, such as acetone, please use the common name. Do not use popular common names that are not typically used in
-the scientific literature, such as alcohol for ethyl alchohol, or that refer to mixtures, like vinegar.
-- Unless using common names, names are **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases. The rules for these names are given below.
-- For ease of comparison, the section numbers follow the [Naming and Indexing of
-Chemical Substances for
-Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).
 
 ---
 
-### 101. Foreword
+## 101. Foreword
 
-This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how the names NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances. The nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries, including quickly comprehending the chemicals in a list.
+This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how chemical names in the NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances. Except for common chemical names, the nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries, including quickly comprehending the chemicals in a list. Every **unique chemical structure** should receive one **unique name**.
 
-### 104. Inversion of Names
+To name a chemical, follow these steps:
+
+1. Determine if a common name exists that is widely used in scientific literature. Do not use popular common names that are not typically used in the scientific literature, such as alcohol for ethyl alchohol, or that refer to mixtures, like vinegar.
+2. If YES: Use the common name, applying formatting rules (inversion, punctuation, etc.) as needed
+3. If NO: Construct a systematic structure-based name following all rules below. The names should be **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases.
+
+For ease of comparison, the section numbers follow the [Naming and Indexing of
+Chemical Substances for
+Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).
+
+## 104. Inversion of Names
 
 To group related substances, index names are inverted. The **Heading Parent** (the main part of the molecule) is listed first, followed by a comma, and then the **Substituents**. If a derivative (like an ester or salt) is present, it appears in the **Modification** at the end of the name.
 
@@ -28,7 +28,7 @@ To group related substances, index names are inverted. The **Heading Parent** (t
   - *Substituent:* 2-(2,4-dichlorophenoxy)-
   - *Modification:* methyl ester
 
-### 106. Order of Precedence of Compound Classes
+## 106. Order of Precedence of Compound Classes
 
 When a compound contains multiple functional groups, the Heading Parent is chosen based on a strict order of precedence. The class higher in the list becomes the parent, while lower classes are expressed as prefixes (substituents).
 
@@ -47,7 +47,7 @@ When a compound contains multiple functional groups, the Heading Parent is chose
 7. **Amines**:
     - *Example:* **1-Butanamine, N-butyl-**.
 
-### 108. Punctuation
+## 108. Punctuation
 
 Punctuation is critical for clarity.
 
@@ -63,27 +63,27 @@ Punctuation is critical for clarity.
   - **.pi.** is used for pi (bonding).
   - *Examples:* **.beta.-Alanine**; **.pi.-Cyclopentadienyl...**; **1,1,1,2,3,3,3-Heptafluoro-2-methoxypropane** (Note the commas separating locants).
 
-### 109. Enclosing Marks
+## 109. Enclosing Marks
 
 Parentheses `()` and brackets `[]` are used to prevent ambiguity, particularly when a substituent itself is substituted (compound radicals).
 
 - *Example:* **Benzoic acid, 4-\[\[(2,4-dichlorophenyl)amino\]carbonyl\]-**
   - Here, brackets enclose the complex substituent group attached to the parent Benzoic acid.
 
-### 110. Multiplicative Prefixes
+## 110. Multiplicative Prefixes
 
 Prefixes such as *di-*, *tri-*, *tetra-* are used for simple substituents. For compound substituents or to avoid ambiguity, *bis-*, *tris-*, *tetrakis-* are used.
 
 - *Example (Simple):* **Benzene, 1,3-dichloro-**.
 - *Example (Complex):* **Ethanone, 1,1'-(1,3-phenylene)bis-**.
 
-### 113. Order of Citation in Modifications
+## 113. Order of Citation in Modifications
 
 Derivatives in the modification phrase (following the inverted name) are cited in a specific order: salts, then esters, then other functional derivatives.
 
 - *Example:* **Glycine, N-acetyl-, methyl ester** (Ester cited in modification).
 
-### 114-118. Locants
+## 114-118. Locants
 
 Locants (numbers or letters) indicate the position of substituents on the skeleton.
 
@@ -93,20 +93,20 @@ Locants (numbers or letters) indicate the position of substituents on the skelet
 - **Multiplicative Nomenclature:** When two identical parents are linked, locants distinguish the positions.
   - *Example:* **1,1'-Biphenyl, 4,4'-dichloro-**.
 
-### 122. Tautomers
+## 122. Tautomers
 
 For compounds that exist in equilibrium between two forms (tautomers), a single preferred form is chosen for the index name to avoid scattering. Common examples include ketones vs. enols and amides vs. imidic acids.
 
 - *Example:* **2-Pyridinone** is preferred over *2-Pyridinol* when the oxo-form is dominant or preferred by rule.
 - *Example:* **2,4(1H,3H)-Pyrimidinedione** is used instead of the Uracil trivial name.
 
-### 130. Substitutive Nomenclature
+## 130. Substitutive Nomenclature
 
 This is the fundamental system used for most organic compounds in the list. A hydrogen atom on the parent skeleton is "substituted" by a radical (group).
 
 - *Examples:* **Benzene, chloromethyl-** (A hydrogen on benzene is replaced by a chloromethyl group).
 
-### 135. Indicated Hydrogen
+## 135. Indicated Hydrogen
 
 For ring systems where maximum unsaturation is possible but one position remains saturated, the "Indicated Hydrogen" convention is strictly observed.
 
@@ -119,7 +119,7 @@ For ring systems where maximum unsaturation is possible but one position remains
 
 ---
 
-## B. Molecular Skeletons (¶140–163A)
+## Molecular Skeletons (¶140–163A)
 
 ### 141. Acyclic Hydrocarbons
 
@@ -166,7 +166,7 @@ Neutral boron hydrides are named *Borane*.
 
 ---
 
-## C. Principal Chemical Groups (Suffixes) (¶164–177)
+## Principal Chemical Groups (Suffixes) (¶164–177)
 
 ### 165. Carboxylic Acids
 
@@ -218,7 +218,7 @@ Named using the suffix *-amine*.
 
 ---
 
-## D. Compound Classes (¶178–201)
+## Compound Classes (¶178–201)
 
 ### 180. Anions
 
@@ -294,7 +294,7 @@ Includes Sulfides, Sulfoxides, Sulfones, and Sulfonamides.
 
 ---
 
-## E. Stereochemistry and Stereoparents (¶202–212)
+## Stereochemistry and Stereoparents (¶202–212)
 
 ### 202. Stereoparents
 
@@ -330,7 +330,7 @@ Common amino acids retain their trivial names.
 
 ---
 
-## F. Specialized Substances (¶213–224)
+## Specialized Substances (¶213–224)
 
 ### 215. Coordination Compounds
 

@@ -1,10 +1,5 @@
 # Naming of Chemical Substances
 
----
-
-
----
-
 ## 101. Foreword
 
 This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how chemical names in the NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances. Except for common chemical names, the nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries, including quickly comprehending the chemicals in a list. Every **unique chemical structure** should receive one **unique name**.

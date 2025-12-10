@@ -2,15 +2,22 @@
 
 ## 101. Foreword
 
-This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how chemical names in the NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances. Except for common chemical names, the nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries, including quickly comprehending the chemicals in a list. Every **unique chemical structure** should receive one **unique name**.
+This is not a comprehensive nomenclature manual for all of chemistry but a specific guide to how chemical names in the NIST spectral library are constructed, ordered, and formatted. The primary goal is to enable a user to rapidly identify specific chemical substances, especially in lists. Except for trivial names, the nomenclature generally follows the rules of the International Union of Pure and Applied Chemistry (IUPAC) but is adapted for the use in the NIST libraries. Every **unique chemical structure** should receive one **unique name**.  Here is the procedure for naming a chemical:
 
-To name a chemical, follow these steps:
+* determine if a trivial name exists that is widely used in scientific literature. These names should not include:
+  * popular common names that are not typically used in the scientific literature, such as bleach.
+  * trivial names that refer to mixtures, like lime.
+  * trivial names not specific to one chemical structure, such as alcohol.
+  * examine all of the candidate names you have been given to see if they are trivial names. 
+* if an acceptable trivial name exists:
+  * IMMEDIATELY apply only formatting rules 108-109 and OUTPUT THE FINAL NAME. DO NOT proceed to 
+   systematic naming sections.
+  * State explicitly: "Trivial name found: [name]. Applying only formatting rules. Final name: [formatted name]."
+* else:
+  * Before constructing any systematic name, verify that u have checked for a trivial names. If you have and the trivial name is acceptable, use the trivial name - DO NOT systematically name the chemical.
+  * Construct a systematic structure-based name following all rules below. The names should be **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases.
 
-1. Determine if a common name exists that is widely used in scientific literature. Do not use popular common names that are not typically used in the scientific literature, such as alcohol for ethyl alchohol, or that refer to mixtures, like vinegar.
-2. If YES: Use the common name, applying formatting rules (inversion, punctuation, etc.) as needed
-3. If NO: Construct a systematic structure-based name following all rules below. The names should be **structure-based**, aiming for **consistency, uniqueness, and retrievability** in databases.
-
-For ease of comparison, the section numbers follow the [Naming and Indexing of
+Note: For ease of comparison, the section numbers follow the [Naming and Indexing of
 Chemical Substances for
 Chemical Abstracts](https://web.cas.org/marketing/pdf/indexguideapp.pdf).
 
